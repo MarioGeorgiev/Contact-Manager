@@ -1,0 +1,30 @@
+import { UserList } from "./UsersList";
+import styles from "./CompanyPortfolio.module.css"
+export default function CompanyDetails(){
+    return(
+        <section id={styles["portfolio-details"]} className={styles["portfolio-details"]}>
+        <div className="container">
+          <div className="row gy-4">
+            <div className="col-lg-8">
+                <div className={styles["portfolio-info"]}>
+                <h3>Project information</h3>
+                <ul>
+                  <li><strong>Company Name</strong>: Web design</li>
+                  <li><strong>Address</strong>: ASU Company</li>
+                  <li><strong>VAT Number</strong>: 01 March, 2020</li>
+                  <li><strong>Phone</strong>Phone</li>
+                  <li><strong>Email</strong>Phone</li>
+                  <li><strong>Activities</strong>Phone</li>
+                </ul>
+              </div>
+              <UserList/>
+              
+            </div>
+            <div className="col-lg-4">
+              
+            </div>
+          </div>
+        </div>
+      </section>
+    )
+}
