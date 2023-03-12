@@ -7,8 +7,8 @@ import Starter from "./components/Starter";
 function App() {
   return (
     <>
-    {/*<CreateCompany/>*/}
-    <Starter/>
+    <CreateCompany/>
+  <Starter/>
     <Navigation/>
     <CompanyPortfolio/>
   <Footer/>

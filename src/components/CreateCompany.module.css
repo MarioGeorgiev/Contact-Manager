@@ -1,10 +1,11 @@
 .overlay {
-    position: absolute;
+    position:absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     z-index: 100;
+    
 }
 
 .backdrop {
@@ -68,7 +69,41 @@
     color: #d9534f;
     min-height: 20px;
 }
+
 .form-group .form-error {
     color: #d9534f;
     min-height: 20px;
+}
+
+.btn {
+    background: #2a87a5;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font: inherit;
+    font-weight: bold;
+    margin: 10px;
+   
+}
+
+.close {
+    background-color: transparent;
+    padding: 5px 10px;
+    height: auto;
+
+    
+  }
+  
+  .btn.close svg {
+    color: black;
+  }
+  #form-actions {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+    
   }
