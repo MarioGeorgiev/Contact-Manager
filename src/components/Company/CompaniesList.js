@@ -1,13 +1,19 @@
-import styles from './CompanyPortfolio.module.css'
+import styles from './CompanyDetails.module.css'
 import AOS from "aos";
 import "aos/dist/aos.css";
-import React, { useEffect } from "react";
-export default function CompanyPortfolio() {
+import React, { useEffect, useState } from "react";
+import Nav from '../Navigation/Nav';
+import CreateCompany from './CreateCompany';
+export default function CompaniesList() {
     useEffect(() => {
         AOS.init();
         AOS.refresh();
     }, [])
+    const [addCompany, setAddCompany] = useState(false)
     return (
+        <>
+        {addCompany && <CreateCompany setAddCompany={setAddCompany}/>}
+        <Nav/>
         <section id={styles["portfolio"]} className={styles["portfolio"]}>
             
             <div className={styles["container"]}>
@@ -24,7 +30,7 @@ export default function CompanyPortfolio() {
                         </ul>
                     </div>
                 </div>
-                <button className={styles["btn-add-portfolio"]}>Add new company</button>
+                <button className={styles["btn-add-portfolio"]} onClick={()=>setAddCompany(true)}>Add new company</button>
                 <div className={["row"] + " " + ["portfolio-container"] + " " + ["aos-init"] + " " +  ["aos-animate"]} data-aos="fade-up" data-aos-delay={200} style={{ position: 'relative', height: '1657.8px' }}>
                     <div className="col-lg-4 col-md-6 portfolio-item filter-app" style={{ position: 'absolute', left: '0px', top: '0px' }}>
                         <div className={styles["portfolio-wrap"]}>
@@ -44,5 +50,6 @@ export default function CompanyPortfolio() {
                 
             </div>
         </section>
+        </>
     )
 }

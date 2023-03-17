@@ -1,7 +1,10 @@
-import { UserList } from "./UsersList";
-import styles from "./CompanyPortfolio.module.css"
+import { EmployeeList } from "../Employee/EmployeeList";
+import styles from "./CompanyDetails.module.css";
+import Nav from '../Navigation/Nav';
 export default function CompanyDetails(){
     return(
+      <>
+      <Nav />
         <section id={styles["portfolio-details"]} className={styles["portfolio-details"]}>
         <div className="container">
           <div className="row gy-4">
@@ -17,7 +20,7 @@ export default function CompanyDetails(){
                   <li><strong>Activities</strong>Phone</li>
                 </ul>
               </div>
-              <UserList/>
+              <EmployeeList/>
               
             </div>
             <div className="col-lg-4">
@@ -26,5 +29,6 @@ export default function CompanyDetails(){
           </div>
         </div>
       </section>
+      </>
     )
 }

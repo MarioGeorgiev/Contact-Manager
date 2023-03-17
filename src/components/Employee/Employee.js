@@ -1,5 +1,5 @@
 
-export default function User({
+export default function Employee({
 }) {
 
     return (<tr>

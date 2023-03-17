@@ -1,6 +1,6 @@
-import User from "./User";
+import User from "./Employee";
 
-export function UserList() {
+export function EmployeeList() {
     const users = [1, 2]
     return (
         <>

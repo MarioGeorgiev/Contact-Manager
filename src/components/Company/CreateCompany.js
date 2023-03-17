@@ -1,7 +1,8 @@
 import styles from './Create.module.css'
-export default function CreateUser({
-
+export default function CreateEmployee({
+  setAddCompany
   }){
+    
       return(
           <div className={styles["overlay"]}>
           <div className={styles["backdrop"]} />
@@ -9,7 +10,7 @@ export default function CreateUser({
             <div className={styles["user-container"]}>
               <header className={styles["headers"]}>
                 <h2>Create Company</h2>
-                <button className={styles["close"] } >
+                <button className={styles["close"] } onClick={()=>setAddCompany(false)} >
                  x
                 </button>
               </header>
@@ -101,7 +102,7 @@ export default function CreateUser({
                 </div>
                 <div id={styles["form-actions"]}>
                   <button id="action-save" className={styles["btn"]} type="submit">Save</button>
-                  <button id="action-cancel" className={styles["btn"]} type="button">
+                  <button id="action-cancel" className={styles["btn"]} type="button" onClick={()=>setAddCompany(false)}>
                     Cancel
                   </button>
                 </div>

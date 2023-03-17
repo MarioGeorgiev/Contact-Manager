@@ -1,4 +1,4 @@
-export default function Navigation(){
+export default function Nav(){
     return(<div className="container d-flex align-items-center justify-content-between">
     <div className="logo">      
     </div>

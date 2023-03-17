@@ -1,24 +1,22 @@
-import CompanyDetails from "./components/CompanyDetails";
-import CompanyPortfolio from "./components/CompanyPortfolio";
-import  CreateCompany  from "./components/CreateCompany";
-import  CreateUser  from "./components/CreateCompany";
-import Footer from "./components/Footer";
-import Navigation from "./components/Navigation";
-import Starter from "./components/Starter";
+import { Route, Routes } from "react-router-dom";
+
+import Starter from './components/Stater/Starter'
+import CompaniesList from './components/Company/CompaniesList'
+import CompanyDetails from './components/Company/CompanyDetails'
+import Footer from './components/Footer/Footer'
 
 function App() {
   return (
     <>
-      
-     {/* 
-     <CreateUser/>
-     <CreateCompany />*/}
-      <Starter />
-      <Navigation />
-      <CompanyPortfolio />
-      <CompanyDetails/>
+    
+      <Routes>
+        <Route path='/' element={<Starter />} />
+        <Route path='/companies' element={<CompaniesList />} />
+        <Route path='/companies/:companyId' element={<CompanyDetails />} />
+      </Routes>
       <Footer />
     </>
+
   );
 }
 
