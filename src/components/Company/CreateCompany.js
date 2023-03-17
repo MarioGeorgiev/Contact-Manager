@@ -1,8 +1,26 @@
+import { useState } from 'react'
 import styles from './Create.module.css'
 export default function CreateEmployee({
-  setAddCompany
+  setAddCompany,
+  onCreateCompany
   }){
-    
+    const [values,setValues] = useState({
+      companyName:"",
+      address:"",
+      manager:"",
+      VATNumber:"",
+      logoUrl:"",
+      phone:"",
+      email:""
+    })
+    const onChangeHandler = (e)=>{
+      setValues(state=> ({...state,[e.target.name]:e.target.value}))
+    }
+    const onSubmitCompany = (e)=>{
+      e.preventDefault()
+      onCreateCompany(values)
+      setAddCompany(false)
+    }
       return(
           <div className={styles["overlay"]}>
           <div className={styles["backdrop"]} />
@@ -14,23 +32,23 @@ export default function CreateEmployee({
                  x
                 </button>
               </header>
-              <form >
+              <form onSubmit={(e) => onSubmitCompany(e)}>
                 <div className={styles["form-row"]}>
                   <div className={styles["form-group"]}>
-                    <label htmlFor="firstName">Company name</label>
+                    <label htmlFor="companyName">Company name</label>
                     <div className={styles["input-wrapper"]}>
                       <span><i className={styles["fa-solid fa-user"]} /></span>
-                      <input id="firstName" name="firstName" type="text" />
+                      <input id="firstName" name="companyName" type="text" value={setValues.companyName} onChange={(e)=>onChangeHandler(e)}/>
                     </div>
                     <p className={styles["form-error"]}>
                      Company should be at least 3 characters long!
                     </p>
                   </div>
                   <div className={styles["form-group"]}>
-                    <label htmlFor="lastName">Address</label>
+                    <label htmlFor="address">Address</label>
                     <div className={styles["input-wrapper"]}>
                       <span><i className={styles["fa-solid fa-user"]} /></span>
-                      <input id="lastName" name="lastName" type="text" />
+                      <input id="lastName" name="address" type="text" value={setValues.address} onChange={(e)=>onChangeHandler(e)} />
                     </div>
                     <p className={styles["form-error"]}>
                       Address is required!
@@ -39,18 +57,18 @@ export default function CreateEmployee({
                 </div>
                 <div className={styles["form-row"]}>
                   <div className={styles["form-group"]}>
-                    <label htmlFor="email">Manager</label>
+                    <label htmlFor="manager">Manager</label>
                     <div className={styles["input-wrapper"]}>
                       <span><i className={styles["fa-solid fa-envelope"]} /></span>
-                      <input id="email" name="email" type="text" />
+                      <input id="email" name="manager" type="text" value={setValues.manager} onChange={(e)=>onChangeHandler(e)}/>
                     </div>
                     <p className={styles["form-error"]}>Email is not valid!</p>
                   </div>
                   <div className={styles["form-group"]}>
-                    <label htmlFor="phoneNumber">VAT number</label>
+                    <label htmlFor="VATNumber">VAT number</label>
                     <div className={styles["input-wrapper"]}>
                       <span><i className={styles["fa-solid fa-phone"]} /></span>
-                      <input id="phoneNumber" name="phoneNumber" type="text" />
+                      <input id="phoneNumber" name="VATNumber" type="text" value={setValues.VATNumber} onChange={(e)=>onChangeHandler(e)} />
                     </div>
                     <p className={styles["form-error"]}>
                         Phone number is not valid!
@@ -58,29 +76,29 @@ export default function CreateEmployee({
                   </div>
                 </div>
                 <div className={styles["form-group long-line"]}>
-                  <label htmlFor="imageUrl">Log Url</label>
+                  <label htmlFor="logoUrl">Log Url</label>
                   <div className={styles["input-wrapper"]}>
                     <span><i className={styles["fa-solid fa-image"]} /></span>
-                    <input id="imageUrl" name="imageUrl" type="text" />
+                    <input id="imageUrl" name="logoUrl" type="text" value={values.logoUrl} onChange={(e)=>onChangeHandler(e)}/>
                   </div>
                   <p className={styles["form-error"]}>Logo is not valid!</p>
                 </div>
                 <div className={styles["form-row"]}>
                   <div className={styles["form-group"]}>
-                    <label htmlFor="country">Phone</label>
+                    <label htmlFor="phone">Phone</label>
                     <div className={styles["input-wrapper"]}>
                       <span><i className={styles["fa-solid fa-map"]} /></span>
-                      <input id="country" name="country" type="text" />
+                      <input id="country" name="phone" type="text" value={setValues.phone} onChange={(e)=>onChangeHandler(e)}/>
                     </div>
                     <p className={styles["form-error"]}>
                       Phone should have 10 digits!
                     </p>
                   </div>
                   <div className={styles["form-group"]}>
-                    <label htmlFor="city">Email</label>
+                    <label htmlFor="email">Email</label>
                     <div className={styles["input-wrapper"]}>
                       <span><i className={styles["fa-solid fa-city"]} /></span>
-                      <input id="city" name="city" type="text" />
+                      <input id="city" name="email" type="text" value={setValues.email} onChange={(e)=>onChangeHandler(e)}/>
                     </div>
                     <p className={styles["form-error"]}>
                       Email is required!
@@ -89,10 +107,10 @@ export default function CreateEmployee({
                 </div>
                 <div className={styles["form-row"]}>
                   <div className={styles["form-group"]}>
-                    <label htmlFor="street">Company activitсies</label>
+                    <label htmlFor="activities">Company activitсies</label>
                     <div className={styles["input-wrapper"]}>
                       <span><i className={styles["fa-solid fa-map"]} /></span>
-                      <input id="street" name="street" type="text" />
+                      <input id="street" name="activities" type="text" />
                     </div>
                     <p className={styles["form-error"]}>
                       Street should be at least 3 characters long!

@@ -4,15 +4,21 @@ import "aos/dist/aos.css";
 import React, { useEffect, useState } from "react";
 import Nav from '../Navigation/Nav';
 import CreateCompany from './CreateCompany';
+import * as api from '../../services/api'
 export default function CompaniesList() {
     useEffect(() => {
         AOS.init();
         AOS.refresh();
     }, [])
     const [addCompany, setAddCompany] = useState(false)
+    const onCreateCompany = async (values)=>{
+           const result = await api.post("http://localhost:3030/jsonstore/companies",values)
+           
+           console.log(result)
+    }
     return (
         <>
-        {addCompany && <CreateCompany setAddCompany={setAddCompany}/>}
+        {addCompany && <CreateCompany setAddCompany={setAddCompany} onCreateCompany={onCreateCompany}/>}
         <Nav/>
         <section id={styles["portfolio"]} className={styles["portfolio"]}>
             
