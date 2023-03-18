@@ -1,5 +1,5 @@
 import styles from './Create.module.css'
-export default function CreateCompany({
+export default function CreateEmployee({
   setAddCompany
   }){
       return(

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import styles from './CompanyDetails.module.css'
 export default function Company({
+    setDeleteCompany,
     _id,
     companyName,
     email,
@@ -15,8 +16,8 @@ export default function Company({
                     <p>{email}</p>
                     <div className={styles["portfolio-links"]}>
                         <Link to={"/companies/" + _id} title="More Details"><i className="bx bx-link" /></Link>
-                        <a href={"/companies/edit/" + _id} data-gallery="portfolioGallery" className={styles["portfolio-lightbox"]} title="Edit"><i className="bx bx-edit" /></a>
-                        <a href={"/companies/delete/" + _id} title="Delete"><i className="bx bxs-trash" /></a>
+                        <button data-gallery="portfolioGallery" className={styles["portfolio-lightbox"]} title="Edit"><i className="bx bx-edit" /></button>
+                        <button title="Delete" onClick={()=>setDeleteCompany(_id)}><i className="bx bxs-trash" /></button>
                     </div>
                 </div>
             </div>

@@ -6,6 +6,7 @@ import CreateCompany from './CreateCompany';
 import * as api from '../../services/api'
 import Company from "./Company";
 import styles from './CompanyDetails.module.css'
+import DeleteCompany from "./DeleteCompany";
 export default function CompaniesList() {
     useEffect(() => {
         AOS.init();
@@ -13,6 +14,7 @@ export default function CompaniesList() {
     }, [])
     const [addCompany, setAddCompany] = useState(false)
     const [companiesList, setCompaniesList] = useState([{}])
+    const [deleteCompany,setDeleteCompany] = useState(false)
     useEffect(() => {
         api.get("http://localhost:3030/jsonstore/companies")
             .then(c => Object.values(c))
@@ -24,8 +26,14 @@ export default function CompaniesList() {
         setCompaniesList(state => [...state, result])
 
     }
+    const onDeleteCompanyConfirm = async(_id) =>{
+        await api.del("http://localhost:3030/jsonstore/companies/" + _id)
+        setCompaniesList(state=> state.filter(x=>x._id!=_id))
+        setDeleteCompany(false)
+    }
     return (
         <>
+            {deleteCompany && <DeleteCompany setDeleteCompany={setDeleteCompany} company = {companiesList.filter(x=>x._id==deleteCompany)} onDeleteCompanyConfirm={onDeleteCompanyConfirm}/>}
             {addCompany && <CreateCompany setAddCompany={setAddCompany} onCreateCompany={onCreateCompany} />}
             <Nav />
             <section id={styles["portfolio"]} className={styles["portfolio"]} >
@@ -46,7 +54,7 @@ export default function CompaniesList() {
                     </div>
                     <button className={styles["btn-add-portfolio"]} onClick={() => setAddCompany(true)}>Add new company</button>
                     <div className={["row"] + " " +["portfolio-container"]} data-aos="fade-up" data-aos-delay={200}>
-                    {companiesList.map(company => <Company key={company._id} setAddCompany={setAddCompany} {...company} />)}
+                    {companiesList.map(company => <Company key={company._id} setAddCompany={setAddCompany} setDeleteCompany={setDeleteCompany}{...company} />)}
                     </div>
                 </div>
             </section>
