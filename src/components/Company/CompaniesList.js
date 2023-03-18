@@ -20,7 +20,7 @@ export default function CompaniesList() {
 
     }, [])
     const onCreateCompany = async (values) => {
-        const result = await api.post("http://localhost:3030/jsonstore/companies", values)
+        const result = await api.post("http://localhost:3030/jsonstore/companies", {...values,"employees":[]})
         setCompaniesList(state => [...state, result])
 
     }

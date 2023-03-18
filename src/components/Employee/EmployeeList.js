@@ -1,4 +1,4 @@
-import User from "./Employee";
+import Employee from "./Employee";
 
 export function EmployeeList() {
     const users = [1, 2]
@@ -35,7 +35,7 @@ export function EmployeeList() {
                     </thead>
                     <tbody>
 
-                        {users.map(x => <User />)}
+                        {users.map(x => <Employee />)}
                     </tbody>
                 </table>
 

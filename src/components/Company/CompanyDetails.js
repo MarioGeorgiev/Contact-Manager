@@ -1,5 +1,5 @@
 import { EmployeeList } from "../Employee/EmployeeList";
-import styles from "./CompanyDetails.module.css";
+import styles from './CompanyDetails.module.css'
 import Nav from '../Navigation/Nav';
 export default function CompanyDetails(){
     return(
