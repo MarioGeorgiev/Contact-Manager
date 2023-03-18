@@ -34,7 +34,7 @@ function getOptions(method = 'get', body){
         options.headers['X-Parse-Session-Token'] = token
     }
    */
-    console.log(body)
+    
     if(body){
         options.headers['Content-Type'] = 'application/json'
         options.body = JSON.stringify(body)
