@@ -1,9 +1,19 @@
 import Employee from "./Employee";
-
-export function EmployeeList() {
-    const users = [1, 2]
+import CreateEmployee from "./CreateEmployee";
+import { useState } from "react";
+export function EmployeeList({
+    employeesCurrent
+}) {
+    const [showAddEmployee, setshowAddEmployee] = useState(false)
+    const [employees,setEmployees] = useState(employeesCurrent)
+    const onCreateEmployeeHandler = (values) =>{
+            console.log(values)
+            setshowAddEmployee(false)
+    }
     return (
         <>
+           
+            {showAddEmployee &&  <CreateEmployee setshowAddEmployee={setshowAddEmployee} onCreateEmployeeHandler={onCreateEmployeeHandler}/>}
             <div className="table-wrapper">
                 <table className="table">
                     <thead>
@@ -34,13 +44,15 @@ export function EmployeeList() {
                         </tr>
                     </thead>
                     <tbody>
-
-                        {users.map(x => <Employee />)}
+                        
+                        {employees && employees.map(x => <Employee {...x}/>)}
+                       
+                        
                     </tbody>
                 </table>
-
+                {employees == "undefined" && <p>Currently this company do not have employees</p>}
             </div>
-            <button className="btn-info" >Add new user</button>
+            <button className="btn-info" onClick={()=>{setshowAddEmployee(true)}}>Add new user</button>
         </>
     )
 }

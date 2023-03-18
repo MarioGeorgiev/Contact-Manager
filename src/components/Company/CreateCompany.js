@@ -38,7 +38,7 @@ export default function CreateCompany({
                 <label htmlFor="companyName">Company name</label>
                 <div className={styles["input-wrapper"]}>
 
-                  <input id="firstName" name="companyName" type="text" value={setValues.companyName} onChange={(e) => onChangeHandler(e)} />
+                  <input id="firstName" name="companyName" type="text" value={values.companyName} onChange={(e) => onChangeHandler(e)} />
                 </div>
                 <p className={styles["form-error"]}>
                   Company should be at least 3 characters long!
@@ -48,7 +48,7 @@ export default function CreateCompany({
                 <label htmlFor="address">Address</label>
                 <div className={styles["input-wrapper"]}>
 
-                  <input id="lastName" name="address" type="text" value={setValues.address} onChange={(e) => onChangeHandler(e)} />
+                  <input id="lastName" name="address" type="text" value={values.address} onChange={(e) => onChangeHandler(e)} />
                 </div>
                 <p className={styles["form-error"]}>
                   Address is required!
@@ -60,7 +60,7 @@ export default function CreateCompany({
                 <label htmlFor="manager">Manager</label>
                 <div className={styles["input-wrapper"]}>
 
-                  <input id="email" name="manager" type="text" value={setValues.manager} onChange={(e) => onChangeHandler(e)} />
+                  <input id="email" name="manager" type="text" value={values.manager} onChange={(e) => onChangeHandler(e)} />
                 </div>
                 <p className={styles["form-error"]}>Email is not valid!</p>
               </div>
@@ -68,7 +68,7 @@ export default function CreateCompany({
                 <label htmlFor="VATNumber">VAT number</label>
                 <div className={styles["input-wrapper"]}>
 
-                  <input id="phoneNumber" name="VATNumber" type="text" value={setValues.VATNumber} onChange={(e) => onChangeHandler(e)} />
+                  <input id="phoneNumber" name="VATNumber" type="text" value={values.VATNumber} onChange={(e) => onChangeHandler(e)} />
                 </div>
                 <p className={styles["form-error"]}>
                   Phone number is not valid!
@@ -88,7 +88,7 @@ export default function CreateCompany({
                 <label htmlFor="phone">Phone</label>
                 <div className={styles["input-wrapper"]}>
 
-                  <input id="country" name="phone" type="text" value={setValues.phone} onChange={(e) => onChangeHandler(e)} />
+                  <input id="country" name="phone" type="text" value={values.phone} onChange={(e) => onChangeHandler(e)} />
                 </div>
                 <p className={styles["form-error"]}>
                   Phone should have 10 digits!
@@ -98,7 +98,7 @@ export default function CreateCompany({
                 <label htmlFor="email">Email</label>
                 <div className={styles["input-wrapper"]}>
 
-                  <input id="city" name="email" type="text" value={setValues.email} onChange={(e) => onChangeHandler(e)} />
+                  <input id="city" name="email" type="text" value={values.email} onChange={(e) => onChangeHandler(e)} />
                 </div>
                 <p className={styles["form-error"]}>
                   Email is required!

@@ -1,15 +1,28 @@
-import styles from './Create.module.css'
+import styles from './CreateDelete.module.css'
+import { useState } from "react";
 export default function CreateEmployee({
-  setAddCompany
+  setshowAddEmployee,
+  onCreateEmployeeHandler
   }){
+      const [values, setValues] = useState({
+        firstName :"",
+        lastName :"",
+        phone:"",
+        email:"",
+        photoUrl:""
+      })
+      const onChangeHandler = (e) => {
+      
+        setValues(state => ({ ...state, [e.target.name]: e.target.value }))
+      }
       return(
           <div className={styles["overlay"]}>
           <div className={styles["backdrop"]} />
           <div className={styles["modal"]}>
             <div className={styles["user-container"]}>
               <header className={styles["headers"]}>
-                <h2>Create Company</h2>
-                <button className={styles["close"] }  onClick={()=>setAddCompany(false)}>
+                <h2>Create Employee</h2>
+                <button className={styles["close"] }  onClick={()=>setshowAddEmployee(false)}>
                  x
                 </button>
               </header>
@@ -17,9 +30,8 @@ export default function CreateEmployee({
                 <div className={styles["form-row"]}>
                   <div className={styles["form-group"]}>
                     <label htmlFor="firstName">First name</label>
-                    <div className={styles["input-wrapper"]}>
-                      <span><i className={styles["fa-solid fa-user"]} /></span>
-                      <input id="firstName" name="firstName" type="text" />
+                    <div className={styles["input-wrapper"]}>                      
+                      <input id="firstName" name="firstName" type="text" value={values.firstName} onChange={(e)=>onChangeHandler(e)} />
                     </div>
                     <p className={styles["form-error"]}>
                      Full name should be at least 3 characters long!
@@ -28,8 +40,8 @@ export default function CreateEmployee({
                   <div className={styles["form-group"]}>
                     <label htmlFor="lastName">Family name</label>
                     <div className={styles["input-wrapper"]}>
-                      <span><i className={styles["fa-solid fa-user"]} /></span>
-                      <input id="lastName" name="lastName" type="text" />
+                      
+                      <input id="lastName" name="lastName" type="text" value={values.lastName} onChange={(e)=>onChangeHandler(e)}/>
                     </div>
                     <p className={styles["form-error"]}>
                       Address is required!
@@ -38,18 +50,18 @@ export default function CreateEmployee({
                 </div>
                 <div className={styles["form-row"]}>
                   <div className={styles["form-group"]}>
-                    <label htmlFor="email">Phone</label>
+                    <label htmlFor="phone">Phone</label>
                     <div className={styles["input-wrapper"]}>
-                      <span><i className={styles["fa-solid fa-envelope"]} /></span>
-                      <input id="email" name="email" type="text" />
+                      
+                      <input id="email" name="phone" type="text" value={values.phone} onChange={(e)=>onChangeHandler(e)}/>
                     </div>
                     <p className={styles["form-error"]}>Phone is not valid!</p>
                   </div>
                   <div className={styles["form-group"]}>
-                    <label htmlFor="phoneNumber">Email</label>
+                    <label htmlFor="email">Email</label>
                     <div className={styles["input-wrapper"]}>
-                      <span><i className={styles["fa-solid fa-phone"]} /></span>
-                      <input id="phoneNumber" name="phoneNumber" type="text" />
+                      
+                      <input id="phoneNumber" name="email" type="text" value={values.email} onChange={(e)=>onChangeHandler(e)}/>
                     </div>
                     <p className={styles["form-error"]}>
                         Phone number is not valid!
@@ -57,17 +69,17 @@ export default function CreateEmployee({
                   </div>
                 </div>
                 <div className={styles["form-group long-line"]}>
-                  <label htmlFor="imageUrl">Photo</label>
+                  <label htmlFor="photoUrl">Photo</label>
                   <div className={styles["input-wrapper"]}>
-                    <span><i className={styles["fa-solid fa-image"]} /></span>
-                    <input id="imageUrl" name="imageUrl" type="text" />
+                    
+                    <input id="photoUrl" name="imageUrl" type="text" value={values.photo} onChange={(e)=>onChangeHandler(e)}/>
                   </div>
                   <p className={styles["form-error"]}>Logo is not valid!</p>
                 </div>
                 
                 <div id={styles["form-actions"]}>
-                  <button id="action-save" className={styles["btn"]} type="submit">Save</button>
-                  <button id="action-cancel" className={styles["btn"]} type="button" onClick={()=>setAddCompany(false)}>
+                  <button id={styles["action-save"]} className={styles["btn"]} type="submit" onClick={()=>onCreateEmployeeHandler(values)}>Save</button>
+                  <button id={styles["action-cancel"]} className={styles["btn"]} type="button" onClick={()=>setshowAddEmployee(false)}>
                     Cancel
                   </button>
                 </div>

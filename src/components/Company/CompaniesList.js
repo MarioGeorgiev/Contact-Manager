@@ -22,18 +22,18 @@ export default function CompaniesList() {
 
     }, [])
     const onCreateCompany = async (values) => {
-        const result = await api.post("http://localhost:3030/jsonstore/companies", {...values,"employees":[]})
+        const result = await api.post("http://localhost:3030/jsonstore/companies", {...values})
         setCompaniesList(state => [...state, result])
 
     }
     const onDeleteCompanyConfirm = async(_id) =>{
         await api.del("http://localhost:3030/jsonstore/companies/" + _id)
-        setCompaniesList(state=> state.filter(x=>x._id!=_id))
+        setCompaniesList(state=> state.filter(x=>x._id!==_id))
         setDeleteCompany(false)
     }
     return (
         <>
-            {deleteCompany && <DeleteCompany setDeleteCompany={setDeleteCompany} company = {companiesList.filter(x=>x._id==deleteCompany)} onDeleteCompanyConfirm={onDeleteCompanyConfirm}/>}
+            {deleteCompany && <DeleteCompany setDeleteCompany={setDeleteCompany} company = {companiesList.filter(x=>x._id===deleteCompany)} onDeleteCompanyConfirm={onDeleteCompanyConfirm}/>}
             {addCompany && <CreateCompany setAddCompany={setAddCompany} onCreateCompany={onCreateCompany} />}
             <Nav />
             <section id={styles["portfolio"]} className={styles["portfolio"]} >
