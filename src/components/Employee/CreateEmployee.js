@@ -9,6 +9,7 @@ export default function CreateEmployee({
         lastName :"",
         phone:"",
         email:"",
+        position:"",
         photoUrl:""
       })
       const onChangeHandler = (e) => {
@@ -68,6 +69,16 @@ export default function CreateEmployee({
                         </p>
                   </div>
                 </div>
+                <div className={styles["form-row"]}>
+                  <div className={styles["form-group"]}>
+                    <label htmlFor="position">Position</label>
+                    <div className={styles["input-wrapper"]}>
+                      
+                      <input id="email" name="position" type="text" value={values.position} onChange={(e)=>onChangeHandler(e)}/>
+                    </div>
+                    <p className={styles["form-error"]}>Position is not valid!</p>
+                  </div>                 
+                </div>
                 <div className={styles["form-group long-line"]}>
                   <label htmlFor="photoUrl">Photo</label>
                   <div className={styles["input-wrapper"]}>
@@ -78,7 +89,7 @@ export default function CreateEmployee({
                 </div>
                 
                 <div id={styles["form-actions"]}>
-                  <button id={styles["action-save"]} className={styles["btn"]} type="submit" onClick={()=>onCreateEmployeeHandler(values)}>Save</button>
+                  <button id={styles["action-save"]} className={styles["btn"]} type="submit" onClick={(e)=>onCreateEmployeeHandler(e,values)}>Save</button>
                   <button id={styles["action-cancel"]} className={styles["btn"]} type="button" onClick={()=>setshowAddEmployee(false)}>
                     Cancel
                   </button>

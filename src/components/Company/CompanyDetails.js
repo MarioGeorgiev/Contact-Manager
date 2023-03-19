@@ -6,13 +6,15 @@ import { useEffect, useState } from "react";
 import * as api from "../../services/api"
 export default function CompanyDetails(){
   const {companyId} = useParams()
+  useEffect(()=>{
+    api.get("http://localhost:3030/jsonstore/companies/" + companyId)
+    .then(result => 
+      setCompany(result))      
+    
+  },[companyId])
+  
     const [company, setCompany] = useState({});
-    useEffect(()=>{
-      api.get("http://localhost:3030/jsonstore/companies/" + companyId)
-      .then(result => 
-        setCompany(result))
-      
-    },[companyId])
+    
     return(
       <>
       <Nav />
@@ -32,7 +34,8 @@ export default function CompanyDetails(){
                 </ul>
               </div>
               <h2>Employees</h2>
-              <EmployeeList employeesCurrent={company.employees}/>
+             
+              <EmployeeList employeesCurrent={company.employees} companyId={companyId}/>
               
             </div>
             <div className="col-lg-4">

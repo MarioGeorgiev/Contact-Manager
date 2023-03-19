@@ -1,19 +1,41 @@
 import Employee from "./Employee";
 import CreateEmployee from "./CreateEmployee";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import * as api from "../../services/api"
+import DeleteEmployee from "./DeleteEmployee";
 export function EmployeeList({
-    employeesCurrent
+    companyId
 }) {
+    //console.log(companyId)
     const [showAddEmployee, setshowAddEmployee] = useState(false)
-    const [employees,setEmployees] = useState(employeesCurrent)
-    const onCreateEmployeeHandler = (values) =>{
-            console.log(values)
-            setshowAddEmployee(false)
+    const [employees, setEmployees] = useState([{}])
+    const [showdeleteEmployee, setShowDeleteEmployee] = useState(false)
+    useEffect(() => {
+        api.get("http://localhost:3030/jsonstore/companies/" + companyId)
+            .then(result => {
+                return result.employees ? Object.values(result.employees) : []
+            }
+            )
+            .then(emp => setEmployees(emp))
+
+
+    }, [companyId])
+    const onCreateEmployeeHandler = async (e, values) => {
+        e.preventDefault()
+        const result = await api.post("http://localhost:3030/jsonstore/companies/" + companyId + "/employees/", {...values, "created": new Date()})
+
+        setEmployees(state => [...state, result])
+
+
+        setshowAddEmployee(false)
+    }
+    const onDeleteEmployeeHandler = async (_id) =>{
+
     }
     return (
         <>
-           
-            {showAddEmployee &&  <CreateEmployee setshowAddEmployee={setshowAddEmployee} onCreateEmployeeHandler={onCreateEmployeeHandler}/>}
+            {showdeleteEmployee && <DeleteEmployee setShowDeleteEmployee={setShowDeleteEmployee} employee = {employees.filter(x=> x._id === showdeleteEmployee)}/>}
+            {showAddEmployee && <CreateEmployee setshowAddEmployee={setshowAddEmployee} onCreateEmployeeHandler={onCreateEmployeeHandler} />}
             <div className="table-wrapper">
                 <table className="table">
                     <thead>
@@ -44,15 +66,17 @@ export function EmployeeList({
                         </tr>
                     </thead>
                     <tbody>
-                        
-                        {employees && employees.map(x => <Employee {...x}/>)}
-                       
-                        
+
+                        { /*(Array.from(employees)).map(x => console.log(x.firstName))*/}
+                        {employees.length>0 && Array.from(employees).map(emp => <Employee key={emp._id} {...emp} setShowDeleteEmployee={setShowDeleteEmployee}/>)}
+
+
+
                     </tbody>
                 </table>
-                {employees == "undefined" && <p>Currently this company do not have employees</p>}
+                {employees.length ===0 && <p>Currently this company do not have employees</p>}
             </div>
-            <button className="btn-info" onClick={()=>{setshowAddEmployee(true)}}>Add new user</button>
+            <button className="btn-info" onClick={() => { setshowAddEmployee(true) }}>Add new user</button>
         </>
     )
 }
