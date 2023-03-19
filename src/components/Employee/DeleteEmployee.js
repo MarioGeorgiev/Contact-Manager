@@ -4,7 +4,7 @@ export default function DeleteEmployee({
   setShowDeleteEmployee,
   employee
 }) {
-  console.log(employee[0]._id)
+
   return (
     <div className={styles["overlay"]}>
       <div className={styles["backdrop"]} />

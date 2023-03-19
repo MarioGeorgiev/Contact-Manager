@@ -8,7 +8,7 @@ export function EmployeeList({
 }) {
     //console.log(companyId)
     const [showAddEmployee, setshowAddEmployee] = useState(false)
-    const [employees, setEmployees] = useState([{}])
+    const [employees, setEmployees] = useState(false)
     const [showdeleteEmployee, setShowDeleteEmployee] = useState(false)
     useEffect(() => {
         api.get("http://localhost:3030/jsonstore/companies/" + companyId)
@@ -68,12 +68,7 @@ export function EmployeeList({
                         </tr>
                     </thead>
                     <tbody>
-
-                        { /*(Array.from(employees)).map(x => console.log(x.firstName))*/}
-                        {employees.length>0 && Array.from(employees).map(emp => <Employee key={emp._id} {...emp} setShowDeleteEmployee={setShowDeleteEmployee}/>)}
-
-
-
+                        {employees.length>=1 && Array.from(employees).map(emp => <Employee key={emp._id} {...emp} setShowDeleteEmployee={setShowDeleteEmployee}/>)}
                     </tbody>
                 </table>
                 {employees.length ===0 && <p>Currently this company do not have employees</p>}

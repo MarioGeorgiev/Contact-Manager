@@ -13,9 +13,11 @@ export default function CompaniesList() {
         AOS.refresh();
     }, [])
     const [addCompany, setAddCompany] = useState(false)
-    const [companiesList, setCompaniesList] = useState([{}])
+   // const [companiesList, setCompaniesList] = useState([{}])
+    const [companiesList, setCompaniesList] = useState(false)
     const [deleteCompany,setDeleteCompany] = useState(false)
     useEffect(() => {
+
         api.get("http://localhost:3030/jsonstore/companies")
             .then(c => Object.values(c))
             .then(c => setCompaniesList(c))
@@ -54,7 +56,7 @@ export default function CompaniesList() {
                     </div>
                     <button className={styles["btn-add-portfolio"]} onClick={() => setAddCompany(true)}>Add new company</button>
                     <div className={["row"] + " " +["portfolio-container"]} data-aos="fade-up" data-aos-delay={200}>
-                    {companiesList.map(company => <Company key={company._id} setAddCompany={setAddCompany} setDeleteCompany={setDeleteCompany}{...company} />)}
+                    { companiesList && companiesList.map(company => <Company key={company._id} setAddCompany={setAddCompany} setDeleteCompany={setDeleteCompany}{...company} />)}
                     </div>
                 </div>
             </section>
