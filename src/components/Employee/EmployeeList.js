@@ -30,11 +30,13 @@ export function EmployeeList({
         setshowAddEmployee(false)
     }
     const onDeleteEmployeeHandler = async (_id) =>{
-
+        await api.del("http://localhost:3030/jsonstore/companies/" + companyId + "/employees/" + _id)
+        setShowDeleteEmployee(false)
+        setEmployees(state => state.filter(x=>x._id !==_id))
     }
     return (
         <>
-            {showdeleteEmployee && <DeleteEmployee setShowDeleteEmployee={setShowDeleteEmployee} employee = {employees.filter(x=> x._id === showdeleteEmployee)}/>}
+            {showdeleteEmployee && <DeleteEmployee setShowDeleteEmployee={setShowDeleteEmployee} onDeleteEmployeeHandler={onDeleteEmployeeHandler} employee = {employees.filter(x=> x._id === showdeleteEmployee)} />}
             {showAddEmployee && <CreateEmployee setshowAddEmployee={setshowAddEmployee} onCreateEmployeeHandler={onCreateEmployeeHandler} />}
             <div className="table-wrapper">
                 <table className="table">

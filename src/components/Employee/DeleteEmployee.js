@@ -1,12 +1,10 @@
 import styles from './CreateDelete.module.css'
-import * as api from '../../services/api'
 export default function DeleteEmployee({
-  //setDeleteCompany,
-  //onDeleteCompanyConfirm,
-  employee,
- setShowDeleteEmployee
+  onDeleteEmployeeHandler,
+  setShowDeleteEmployee,
+  employee
 }) {
-  console.log(employee)
+  console.log(employee[0]._id)
   return (
     <div className={styles["overlay"]}>
       <div className={styles["backdrop"]} />
@@ -38,7 +36,7 @@ export default function DeleteEmployee({
               
             </div>
           <div id={styles["form-actions"]}>
-            <button id={styles["action-save"]} className={styles["btn"]} type="submit" >Save</button>
+            <button id={styles["action-save"]} className={styles["btn"]} type="submit" onClick={()=>onDeleteEmployeeHandler(employee[0]?._id)}>Save</button>
             <button id={styles["action-cancel"]} className={styles["btn"]} type="button" onClick={()=>setShowDeleteEmployee(false)}>
               Cancel
             </button>
