@@ -3,7 +3,8 @@ import styles from './CreateDelete.module.css'
 import * as api from "../../services/api"
 export default function EditCompany({
   setEditCompany,
-  editCompany
+  editCompany,
+  onEditCompany
 }) {
 
   const [values, setValues] = useState({
@@ -33,11 +34,12 @@ export default function EditCompany({
   const onChangeHandler = (e) => {
     setValues(state => ({ ...state, [e.target.name]: e.target.value }))
   }
-  const DeleteCompany = (e) => {
+  const EditCompany = (e) => {
     e.preventDefault()
-    // onCreateCompany(values)
-    //  setAddCompany(false)
+    onEditCompany(editCompany,values)
+    setEditCompany(false)
   }
+   
   return (
     <div className={styles["overlay"]}>
       <div className={styles["backdrop"]} />
@@ -49,7 +51,7 @@ export default function EditCompany({
               x
             </button>
           </header>
-          <form onSubmit={(e) => DeleteCompany(e)}>
+          <form onSubmit={(e) => EditCompany(e)}>
             <div className={styles["form-row"]}>
               <div className={styles["form-group"]}>
                 <label htmlFor="companyName">Company name</label>

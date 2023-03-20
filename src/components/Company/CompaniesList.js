@@ -35,9 +35,14 @@ export default function CompaniesList() {
         setCompaniesList(state=> state.filter(x=>x._id!==_id))
         setDeleteCompany(false)
     }
+    const onEditCompany = async (_id,values) =>{
+        const updatedCompany = await api.put("http://localhost:3030/jsonstore/companies/" + _id, values)
+        setCompaniesList(state => state.map(x => x._id === _id ? updatedCompany : x));
+       
+    }
     return (
         <>
-            {editCompany && <EditCompany setEditCompany={setEditCompany} editCompany={editCompany}/>}
+            {editCompany && <EditCompany setEditCompany={setEditCompany} editCompany={editCompany} onEditCompany={onEditCompany}/>}
             {deleteCompany && <DeleteCompany setDeleteCompany={setDeleteCompany} company = {companiesList.filter(x=>x._id===deleteCompany)} onDeleteCompanyConfirm={onDeleteCompanyConfirm}/>}
             {addCompany && <CreateCompany setAddCompany={setAddCompany} onCreateCompany={onCreateCompany} />}
             <Nav />
