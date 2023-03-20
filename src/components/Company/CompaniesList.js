@@ -7,6 +7,7 @@ import * as api from '../../services/api'
 import Company from "./Company";
 import styles from './CompanyDetails.module.css'
 import DeleteCompany from "./DeleteCompany";
+import EditCompany from "./EditCompany";
 export default function CompaniesList() {
     useEffect(() => {
         AOS.init();
@@ -16,6 +17,7 @@ export default function CompaniesList() {
    // const [companiesList, setCompaniesList] = useState([{}])
     const [companiesList, setCompaniesList] = useState(false)
     const [deleteCompany,setDeleteCompany] = useState(false)
+    const [editCompany,setEditCompany] = useState(false)
     useEffect(() => {
 
         api.get("http://localhost:3030/jsonstore/companies")
@@ -35,6 +37,7 @@ export default function CompaniesList() {
     }
     return (
         <>
+            {editCompany && <EditCompany setEditCompany={setEditCompany} editCompany={editCompany}/>}
             {deleteCompany && <DeleteCompany setDeleteCompany={setDeleteCompany} company = {companiesList.filter(x=>x._id===deleteCompany)} onDeleteCompanyConfirm={onDeleteCompanyConfirm}/>}
             {addCompany && <CreateCompany setAddCompany={setAddCompany} onCreateCompany={onCreateCompany} />}
             <Nav />
@@ -56,7 +59,12 @@ export default function CompaniesList() {
                     </div>
                     <button className={styles["btn-add-portfolio"]} onClick={() => setAddCompany(true)}>Add new company</button>
                     <div className={["row"] + " " +["portfolio-container"]} data-aos="fade-up" data-aos-delay={200}>
-                    { companiesList && companiesList.map(company => <Company key={company._id} setAddCompany={setAddCompany} setDeleteCompany={setDeleteCompany}{...company} />)}
+                    { companiesList && companiesList.map(company => 
+                    <Company key={company._id} 
+                    setEditCompany={setEditCompany}
+                    setAddCompany={setAddCompany} 
+                    setDeleteCompany={setDeleteCompany}
+                    {...company} />)}
                     </div>
                 </div>
             </section>
