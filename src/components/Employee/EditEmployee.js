@@ -1,9 +1,12 @@
 import styles from './CreateDelete.module.css'
-import { useState } from "react";
-export default function CreateEmployee({
-  setshowAddEmployee,
-  onCreateEmployeeHandler
+import { useState,useEffect } from "react";
+import * as api from "../../services/api"
+export default function EditEmployee({
+  setShowEditEmployee,
+  showEditEmployee,
+  companyId
   }){
+    
       const [values, setValues] = useState({
         firstName :"",
         lastName :"",
@@ -12,6 +15,20 @@ export default function CreateEmployee({
         position:"",
         photoUrl:""
       })
+      useEffect(() => {
+        api.get("http://localhost:3030/jsonstore/companies/" + companyId + "/employees/" + showEditEmployee)
+          .then(result => setValues({
+            firstName: result.firstName,
+            lastName: result.lastName,
+            phone: result.phone,
+            email: result.email,
+            position: result.position,
+            photoUrl: result.photoUrl,
+
+          })
+          )
+    
+      }, [companyId,showEditEmployee])
       const onChangeHandler = (e) => {
       
         setValues(state => ({ ...state, [e.target.name]: e.target.value }))
@@ -22,8 +39,8 @@ export default function CreateEmployee({
           <div className={styles["modal"]}>
             <div className={styles["user-container"]}>
               <header className={styles["headers"]}>
-                <h2>Create Employee</h2>
-                <button className={styles["close"] }  onClick={()=>setshowAddEmployee(false)}>
+                <h2>Edit Employee</h2>
+                <button className={styles["close"] }  onClick={()=>setShowEditEmployee(false)}>
                  x
                 </button>
               </header>
@@ -83,14 +100,14 @@ export default function CreateEmployee({
                   <label htmlFor="photoUrl">Photo</label>
                   <div className={styles["input-wrapper"]}>
                     
-                    <input id="photoUrl" name="photoUrl" type="text" value={values.photo} onChange={(e)=>onChangeHandler(e)}/>
+                    <input id="photoUrl" name="photoUrl" type="text" value={values.photoUrl} onChange={(e)=>onChangeHandler(e)}/>
                   </div>
                   <p className={styles["form-error"]}>Logo is not valid!</p>
                 </div>
                 
                 <div id={styles["form-actions"]}>
-                  <button id={styles["action-save"]} className={styles["btn"]} type="submit" onClick={(e)=>onCreateEmployeeHandler(e,values)}>Save</button>
-                  <button id={styles["action-cancel"]} className={styles["btn"]} type="button" onClick={()=>setshowAddEmployee(false)}>
+                  <button id={styles["action-save"]} className={styles["btn"]} type="submit" >Save</button>
+                  <button id={styles["action-cancel"]} className={styles["btn"]} type="button" onClick={()=>setShowEditEmployee(false)}>
                     Cancel
                   </button>
                 </div>

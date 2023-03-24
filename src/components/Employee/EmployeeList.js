@@ -3,6 +3,7 @@ import CreateEmployee from "./CreateEmployee";
 import { useState, useEffect } from "react";
 import * as api from "../../services/api"
 import DeleteEmployee from "./DeleteEmployee";
+import EditEmployee from "./EditEmployee";
 export function EmployeeList({
     companyId
 }) {
@@ -10,6 +11,7 @@ export function EmployeeList({
     const [showAddEmployee, setshowAddEmployee] = useState(false)
     const [employees, setEmployees] = useState(false)
     const [showdeleteEmployee, setShowDeleteEmployee] = useState(false)
+    const [showEditEmployee, setshowEditEmployee] = useState(false)
     useEffect(() => {
         api.get("http://localhost:3030/jsonstore/companies/" + companyId)
             .then(result => {
@@ -36,6 +38,7 @@ export function EmployeeList({
     }
     return (
         <>
+        {showEditEmployee && <EditEmployee setShowEditEmployee={setshowEditEmployee} showEditEmployee={showEditEmployee} companyId={companyId}/>}
             {showdeleteEmployee && <DeleteEmployee setShowDeleteEmployee={setShowDeleteEmployee} onDeleteEmployeeHandler={onDeleteEmployeeHandler} employee = {employees.filter(x=> x._id === showdeleteEmployee)} />}
             {showAddEmployee && <CreateEmployee setshowAddEmployee={setshowAddEmployee} onCreateEmployeeHandler={onCreateEmployeeHandler} />}
             <div className="table-wrapper">
@@ -68,7 +71,11 @@ export function EmployeeList({
                         </tr>
                     </thead>
                     <tbody>
-                        {employees.length>=1 && Array.from(employees).map(emp => <Employee key={emp._id} {...emp} setShowDeleteEmployee={setShowDeleteEmployee}/>)}
+                        {employees.length>=1 && Array.from(employees).map(emp => <Employee 
+                        key={emp._id} 
+                        {...emp} 
+                        setShowDeleteEmployee={setShowDeleteEmployee}
+                        setShowEditEmployee={setshowEditEmployee}/>)}
                     </tbody>
                 </table>
                 {employees.length ===0 && <p>Currently this company do not have employees</p>}
