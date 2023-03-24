@@ -36,9 +36,14 @@ export function EmployeeList({
         setShowDeleteEmployee(false)
         setEmployees(state => state.filter(x=>x._id !==_id))
     }
+    const onEditEmployee = async (_id,values) =>{
+        const updatedEmployee = await api.put("http://localhost:3030/jsonstore/companies/" + companyId + "/employees/" + _id, values)
+        setEmployees(state => state.map(x => x._id === _id ? updatedEmployee : x));
+       
+    }
     return (
         <>
-        {showEditEmployee && <EditEmployee setShowEditEmployee={setshowEditEmployee} showEditEmployee={showEditEmployee} companyId={companyId}/>}
+        {showEditEmployee && <EditEmployee setShowEditEmployee={setshowEditEmployee} showEditEmployee={showEditEmployee} companyId={companyId} onEditEmployee={onEditEmployee}/>}
             {showdeleteEmployee && <DeleteEmployee setShowDeleteEmployee={setShowDeleteEmployee} onDeleteEmployeeHandler={onDeleteEmployeeHandler} employee = {employees.filter(x=> x._id === showdeleteEmployee)} />}
             {showAddEmployee && <CreateEmployee setshowAddEmployee={setshowAddEmployee} onCreateEmployeeHandler={onCreateEmployeeHandler} />}
             <div className="table-wrapper">

@@ -4,6 +4,7 @@ import * as api from "../../services/api"
 export default function EditEmployee({
   setShowEditEmployee,
   showEditEmployee,
+  onEditEmployee,
   companyId
   }){
     
@@ -32,6 +33,11 @@ export default function EditEmployee({
       const onChangeHandler = (e) => {
       
         setValues(state => ({ ...state, [e.target.name]: e.target.value }))
+      }
+      const EditEmployee = (e) => {
+        e.preventDefault()
+        onEditEmployee(showEditEmployee,values)
+        setShowEditEmployee(false)
       }
       return(
           <div className={styles["overlay"]}>
@@ -106,7 +112,7 @@ export default function EditEmployee({
                 </div>
                 
                 <div id={styles["form-actions"]}>
-                  <button id={styles["action-save"]} className={styles["btn"]} type="submit" >Save</button>
+                  <button id={styles["action-save"]} className={styles["btn"]} type="submit" onClick={(e)=>EditEmployee(e)}>Save</button>
                   <button id={styles["action-cancel"]} className={styles["btn"]} type="button" onClick={()=>setShowEditEmployee(false)}>
                     Cancel
                   </button>
