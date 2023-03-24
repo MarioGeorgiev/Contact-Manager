@@ -1,11 +1,15 @@
+import { Link } from "react-router-dom";
+
 export default function Nav(){
     return(<div className="container d-flex align-items-center justify-content-between">
     <div className="logo">      
     </div>
     <nav id="navbar" className="navbar">
       <ul>
-        <li><a className="nav-link scrollto " href="#hero">Home</a></li>
-        <li><a className="nav-link scrollto" href="#about">About</a></li>
+        <li><Link className="nav-link scrollto " to={'/companies'}>Home</Link></li>
+        <li><Link className="nav-link scrollto " to={'/register'}>Register</Link></li>
+        <li><Link className="nav-link scrollto " to={'/logout'}>logout</Link></li>
+        {/*<li><a className="nav-link scrollto" href="#about">About</a></li>
         <li><a className="nav-link scrollto" href="#services">Services</a></li>
         <li><a className="nav-link scrollto " href="#portfolio">Portfolio</a></li>
         <li><a className="nav-link scrollto" href="#team">Team</a></li>
@@ -27,7 +31,7 @@ export default function Nav(){
             <li><a href="#">Drop Down 4</a></li>
           </ul>
         </li>
-        <li><a className="nav-link scrollto" href="#contact">Contact</a></li>
+<li><a className="nav-link scrollto" href="#contact">Contact</a></li>*/}
       </ul>
       <i className="bi bi-list mobile-nav-toggle" />
     </nav>
