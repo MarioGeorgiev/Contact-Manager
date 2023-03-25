@@ -7,7 +7,7 @@ import * as api from "../../services/api"
 export default function CompanyDetails(){
   const {companyId} = useParams()
   useEffect(()=>{
-    api.get("http://localhost:3030/jsonstore/companies/" + companyId)
+    api.get("http://localhost:3030/data/companies/" + companyId)
     .then(result => 
       setCompany(result))      
     

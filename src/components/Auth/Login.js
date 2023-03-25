@@ -1,5 +1,4 @@
 import { useState } from "react"
-import Nav from "../Navigation/Nav"
 import styles from './RegisterLogin.module.css'
 import * as api from "../../services/api"
 import {  useNavigate } from "react-router-dom"
@@ -15,12 +14,14 @@ export default function Register() {
     }
     const onSubmitHandler = async (e) => {
         e.preventDefault()
+        console.log("Click")
         const result = await api.login(values.email,values.password)
+
         navigate('/companies')
     }
     return (
         <>
-            <Nav />
+            
             <div className={styles["login-page"]}>
                 <div className={styles["form"]}>
                     <form className={styles["login-form"]} onSubmit={(e)=>onSubmitHandler(e)}>

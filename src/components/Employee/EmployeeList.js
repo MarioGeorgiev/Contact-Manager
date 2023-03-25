@@ -13,9 +13,14 @@ export function EmployeeList({
     const [showdeleteEmployee, setShowDeleteEmployee] = useState(false)
     const [showEditEmployee, setshowEditEmployee] = useState(false)
     useEffect(() => {
-        api.get("http://localhost:3030/jsonstore/companies/" + companyId)
+        const search = encodeURIComponent(`companyId="${companyId}"`)
+       // console.log("http://localhost:3030/data/employees?where=" + search)
+        api.get("http://localhost:3030/data/employees?where=" + search)
             .then(result => {
-                return result.employees ? Object.values(result.employees) : []
+                //console.log(result)
+                //return result?.employees ? result : []
+                
+                return result
             }
             )
             .then(emp => setEmployees(emp))
@@ -24,27 +29,32 @@ export function EmployeeList({
     }, [companyId])
     const onCreateEmployeeHandler = async (e, values) => {
         e.preventDefault()
-        const result = await api.post("http://localhost:3030/jsonstore/companies/" + companyId + "/employees/", {...values, "created": new Date()})
+        const result = await api.post("http://localhost:3030/data/employees/",
+            {
+                ...values,
+                "companyId" : companyId,
+                "created": new Date()
+            })
 
         setEmployees(state => [...state, result])
 
 
         setshowAddEmployee(false)
     }
-    const onDeleteEmployeeHandler = async (_id) =>{
-        await api.del("http://localhost:3030/jsonstore/companies/" + companyId + "/employees/" + _id)
+    const onDeleteEmployeeHandler = async (_id) => {
+        await api.del("http://localhost:3030/data/employees/" + _id)
         setShowDeleteEmployee(false)
-        setEmployees(state => state.filter(x=>x._id !==_id))
+        setEmployees(state => state.filter(x => x._id !== _id))
     }
-    const onEditEmployee = async (_id,values) =>{
-        const updatedEmployee = await api.put("http://localhost:3030/jsonstore/companies/" + companyId + "/employees/" + _id, values)
+    const onEditEmployee = async (_id, values) => {
+        const updatedEmployee = await api.put("http://localhost:3030/data/employees/" + _id, values)
         setEmployees(state => state.map(x => x._id === _id ? updatedEmployee : x));
-       
+
     }
     return (
         <>
-        {showEditEmployee && <EditEmployee setShowEditEmployee={setshowEditEmployee} showEditEmployee={showEditEmployee} companyId={companyId} onEditEmployee={onEditEmployee}/>}
-            {showdeleteEmployee && <DeleteEmployee setShowDeleteEmployee={setShowDeleteEmployee} onDeleteEmployeeHandler={onDeleteEmployeeHandler} employee = {employees.filter(x=> x._id === showdeleteEmployee)} />}
+            {showEditEmployee && <EditEmployee setShowEditEmployee={setshowEditEmployee} showEditEmployee={showEditEmployee} companyId={companyId} onEditEmployee={onEditEmployee} />}
+            {showdeleteEmployee && <DeleteEmployee setShowDeleteEmployee={setShowDeleteEmployee} onDeleteEmployeeHandler={onDeleteEmployeeHandler} employee={employees.filter(x => x._id === showdeleteEmployee)} />}
             {showAddEmployee && <CreateEmployee setshowAddEmployee={setshowAddEmployee} onCreateEmployeeHandler={onCreateEmployeeHandler} />}
             <div className="table-wrapper">
                 <table className="table">
@@ -76,14 +86,15 @@ export function EmployeeList({
                         </tr>
                     </thead>
                     <tbody>
-                        {employees.length>=1 && Array.from(employees).map(emp => <Employee 
-                        key={emp._id} 
-                        {...emp} 
-                        setShowDeleteEmployee={setShowDeleteEmployee}
-                        setShowEditEmployee={setshowEditEmployee}/>)}
+                    {employees.length >=1 && Array.from(employees).map(emp => <Employee
+                            key={emp._id}
+                            {...emp}
+                            setShowDeleteEmployee={setShowDeleteEmployee}
+                            setShowEditEmployee={setshowEditEmployee} />)}
                     </tbody>
+                    
                 </table>
-                {employees.length ===0 && <p>Currently this company do not have employees</p>}
+                {employees.length === 0 && <p>Currently this company do not have employees</p>}
             </div>
             <button className="btn-info" onClick={() => { setshowAddEmployee(true) }}>Add new user</button>
         </>

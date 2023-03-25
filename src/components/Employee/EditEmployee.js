@@ -17,7 +17,7 @@ export default function EditEmployee({
         photoUrl:""
       })
       useEffect(() => {
-        api.get("http://localhost:3030/jsonstore/companies/" + companyId + "/employees/" + showEditEmployee)
+        api.get("http://localhost:3030/data/employees/" + showEditEmployee)
           .then(result => setValues({
             firstName: result.firstName,
             lastName: result.lastName,

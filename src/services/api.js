@@ -19,8 +19,17 @@ async function requst(url,options){
        
     }
      catch (error) {
-        alert(error.message);
-        throw error
+        if(error.message === 'Unauthorized')
+        {
+            alert("You are not login or your account is not authorized to perform this action")
+            throw error
+        }else{
+            alert(error.message);
+            throw error
+        }
+       
+       
+        
     }
 }
 function getOptions(method = 'get', body){
@@ -29,11 +38,11 @@ function getOptions(method = 'get', body){
         headers:{}    
     };
     
-    const token = sessionStorage.getItem('authToken')
-  /*  if(token !=null){
-        options.headers['X-Parse-Session-Token'] = token
+    const token = localStorage.getItem('authToken')
+    if(token !=null){
+        options.headers['X-Authorization'] = token
     }
-   */
+   
     
     if(body){
         options.headers['Content-Type'] = 'application/json'
@@ -60,25 +69,25 @@ export async function login(email,password){
     const result = await post(settings.host + '/login',{email,password})
     
 
-     sessionStorage.setItem('authToken' , result.accessToken)
-     sessionStorage.setItem('email' , result.email)
-     sessionStorage.setItem('userId' , result._id)
+     localStorage.setItem('authToken' , result.accessToken)
+     localStorage.setItem('email' , result.email)
+     localStorage.setItem('userId' , result._id)
      return result;
 }
 
 export async function register(email,password,){
     const result = await post(settings.host + '/register',{email,password})
 
-    sessionStorage.setItem('authToken' , result.accessToken)
-    sessionStorage.setItem('email' , result.email)
-    sessionStorage.setItem('userId' , result._id)
+    localStorage.setItem('authToken' , result.accessToken)
+    localStorage.setItem('email' , result.email)
+    localStorage.setItem('userId' , result._id)
     return result;
 }
 export async function logout(){
     const result = await post(settings.host + '/logout',{})
-
-    sessionStorage.removeItem('authToken')
-    sessionStorage.removeItem('email')
-    sessionStorage.removeItem('userId')
+    
+    localStorage.removeItem('authToken')
+    localStorage.removeItem('email')
+    localStorage.removeItem('userId')
     return result;
 }

@@ -17,7 +17,7 @@ export default function EditCompany({
     email: ""
   })
   useEffect(() => {
-    api.get("http://localhost:3030/jsonstore/companies/" + editCompany)
+    api.get("http://localhost:3030/data/companies/" + editCompany)
       .then(result => setValues({
         companyName: result.companyName,
         address: result.address,
