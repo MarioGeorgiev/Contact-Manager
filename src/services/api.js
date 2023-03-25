@@ -1,5 +1,5 @@
 export const settings ={
-    host:'http://localhost:3030/jsonstore/'
+    host:'http://localhost:3030/users'
 }
 async function requst(url,options){
     try {
@@ -56,21 +56,22 @@ export async function del(url){
     return await requst(url,getOptions('delete'))
 }
 
-export async function login(username,password){
-     const result = await post(settings.host + '/login',{username,password})
+export async function login(email,password){
+    const result = await post(settings.host + '/login',{email,password})
+    
 
-     sessionStorage.setItem('authToken' , result.sessionToken)
+     sessionStorage.setItem('authToken' , result.accessToken)
      sessionStorage.setItem('email' , result.email)
-     sessionStorage.setItem('userId' , result.objectId)
+     sessionStorage.setItem('userId' , result._id)
      return result;
 }
 
-export async function register(email,username,password,){
-    const result = await post(settings.host + '/users',{email,username,password,})
+export async function register(email,password,){
+    const result = await post(settings.host + '/register',{email,password})
 
-    sessionStorage.setItem('authToken' , result.sessionToken)
+    sessionStorage.setItem('authToken' , result.accessToken)
     sessionStorage.setItem('email' , result.email)
-    sessionStorage.setItem('userId' , result.objectId)
+    sessionStorage.setItem('userId' , result._id)
     return result;
 }
 export async function logout(){
