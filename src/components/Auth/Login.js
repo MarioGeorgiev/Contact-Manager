@@ -1,9 +1,11 @@
 import { useState } from "react"
+import {  useNavigate } from "react-router-dom"
 import styles from './RegisterLogin.module.css'
 import * as api from "../../services/api"
-import {  useNavigate } from "react-router-dom"
+import { useAuthContext } from "../../contexts/AuthContext";
 export default function Register() {
     const navigate = useNavigate();
+    const { authToken,setAuthToken } = useAuthContext();
     const [values, setValues] = useState({
         email: "",
         password: ""
@@ -13,10 +15,13 @@ export default function Register() {
 
     }
     const onSubmitHandler = async (e) => {
-        e.preventDefault()
-        console.log("Click")
+        e.preventDefault()       
         const result = await api.login(values.email,values.password)
-
+        console.log(result)
+        if(result.accessToken){
+            setAuthToken(result.accessToken)
+        }
+        
         navigate('/companies')
     }
     return (
