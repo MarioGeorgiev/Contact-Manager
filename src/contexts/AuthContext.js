@@ -8,7 +8,11 @@ export const AuthProvider = ({
 }) => {
     const [authToken, setAuthToken] = useState(() => {
         if (localStorage.getItem("authToken")) {
-            return true
+            return {
+                "authToken":localStorage.getItem("authToken"),
+                "authToken":localStorage.getItem("email"),
+                "userId":localStorage.getItem("userId"),
+            }
         } else {
             return false
         }

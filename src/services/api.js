@@ -23,7 +23,10 @@ async function requst(url,options){
         {
             alert("You are not login or your account is not authorized to perform this action")
             throw error
-        }else{
+        }else if(error.message === "Resource not found"){
+
+        }
+        else{
             alert(error.message);
             throw error
         }
@@ -32,7 +35,7 @@ async function requst(url,options){
         
     }
 }
-function getOptions(method = 'get', body){
+function getOptions(method = 'get', body,){
     const options = {
         method,
         headers:{}    
@@ -40,6 +43,7 @@ function getOptions(method = 'get', body){
     
     const token = localStorage.getItem('authToken')
     if(token !=null){
+
         options.headers['X-Authorization'] = token
     }
    

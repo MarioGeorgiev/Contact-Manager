@@ -4,10 +4,12 @@ import { useState, useEffect } from "react";
 import * as api from "../../services/api"
 import DeleteEmployee from "./DeleteEmployee";
 import EditEmployee from "./EditEmployee";
+import { useAuthContext } from "../../contexts/AuthContext";
 export function EmployeeList({
     companyId
 }) {
     //console.log(companyId)
+    const { authToken } = useAuthContext();
     const [showAddEmployee, setshowAddEmployee] = useState(false)
     const [employees, setEmployees] = useState(false)
     const [showdeleteEmployee, setShowDeleteEmployee] = useState(false)
@@ -18,9 +20,8 @@ export function EmployeeList({
         api.get("http://localhost:3030/data/employees?where=" + search)
             .then(result => {
                 //console.log(result)
-                //return result?.employees ? result : []
-                
-                return result
+                //return result?.employees ? result : []                
+                return result ? result : []
             }
             )
             .then(emp => setEmployees(emp))
@@ -33,6 +34,7 @@ export function EmployeeList({
             {
                 ...values,
                 "companyId" : companyId,
+                "addedBy": authToken.email,
                 "created": new Date()
             })
 
@@ -80,6 +82,10 @@ export function EmployeeList({
                             </th>
                             <th>
                                 Created
+
+                            </th>
+                            <th>
+                                Created by
 
                             </th>
                             <th>Actions</th>

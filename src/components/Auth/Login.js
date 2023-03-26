@@ -5,7 +5,7 @@ import * as api from "../../services/api"
 import { useAuthContext } from "../../contexts/AuthContext";
 export default function Register() {
     const navigate = useNavigate();
-    const { authToken,setAuthToken } = useAuthContext();
+    const { setAuthToken } = useAuthContext();
     const [values, setValues] = useState({
         email: "",
         password: ""
@@ -17,9 +17,13 @@ export default function Register() {
     const onSubmitHandler = async (e) => {
         e.preventDefault()       
         const result = await api.login(values.email,values.password)
-        console.log(result)
+      
         if(result.accessToken){
-            setAuthToken(result.accessToken)
+            setAuthToken(state =>({
+                "authToken": result.accessToken,
+                "userId": result._id,
+                "email": result.email,
+            }))
         }
         
         navigate('/companies')

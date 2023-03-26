@@ -16,43 +16,45 @@ export default function CompaniesList() {
     }, [])
 
     const [addCompany, setAddCompany] = useState(false)
-   // const [companiesList, setCompaniesList] = useState([{}])
+    // const [companiesList, setCompaniesList] = useState([{}])
     const [companiesList, setCompaniesList] = useState(false)
-    const [deleteCompany,setDeleteCompany] = useState(false)
-    const [editCompany,setEditCompany] = useState(false)
+    const [deleteCompany, setDeleteCompany] = useState(false)
+    const [editCompany, setEditCompany] = useState(false)
     useEffect(() => {
-        
-            api.get("http://localhost:3030/data/companies")
+
+        api.get("http://localhost:3030/data/companies")
             .then(c => Object.values(c))
             .then(c => setCompaniesList(c))
-            .catch((error)=>{
+            .catch((error) => {
                 console.log(error.message)
                 setCompaniesList([])
             })
-         
-        
+
+
 
     }, [])
     const onCreateCompany = async (values) => {
-        const result = await api.post("http://localhost:3030/data/companies", {...values})
+        const result = await api.post("http://localhost:3030/data/companies", { ...values })
         setCompaniesList(state => [...state, result])
 
     }
-    const onDeleteCompanyConfirm = async(_id) =>{
+    const onDeleteCompanyConfirm = async (_id) => {
         await api.del("http://localhost:3030/data/companies/" + _id)
-        setCompaniesList(state=> state.filter(x=>x._id!==_id))
+        
+        setCompaniesList(state => state.filter(x => x._id !== _id))
         setDeleteCompany(false)
     }
-    const onEditCompany = async (_id,values) =>{
+    const onEditCompany = async (_id, values) => {
         const updatedCompany = await api.put("http://localhost:3030/data/companies/" + _id, values)
         setCompaniesList(state => state.map(x => x._id === _id ? updatedCompany : x));
-       
     }
+
+
     return (
         <>
-            
-            {editCompany && <EditCompany setEditCompany={setEditCompany} editCompany={editCompany} onEditCompany={onEditCompany}/>}
-            {deleteCompany && <DeleteCompany setDeleteCompany={setDeleteCompany} company = {companiesList.filter(x=>x._id===deleteCompany)} onDeleteCompanyConfirm={onDeleteCompanyConfirm}/>}
+
+            {editCompany && <EditCompany setEditCompany={setEditCompany} editCompany={editCompany} onEditCompany={onEditCompany} />}
+            {deleteCompany && <DeleteCompany setDeleteCompany={setDeleteCompany} company={companiesList.filter(x => x._id === deleteCompany)} onDeleteCompanyConfirm={onDeleteCompanyConfirm} />}
             {addCompany && <CreateCompany setAddCompany={setAddCompany} onCreateCompany={onCreateCompany} />}
             <Nav />
             <section id={styles["portfolio"]} className={styles["portfolio"]} >
@@ -72,13 +74,13 @@ export default function CompaniesList() {
                         </div>
                     </div>
                     <button className={styles["btn-add-portfolio"]} onClick={() => setAddCompany(true)}>Add new company</button>
-                    <div className={["row"] + " " +["portfolio-container"]} data-aos="fade-up" data-aos-delay={200}>
-                    { companiesList && companiesList.map(company => 
-                    <Company key={company._id} 
-                    setEditCompany={setEditCompany}
-                    setAddCompany={setAddCompany} 
-                    setDeleteCompany={setDeleteCompany}
-                    {...company} />)}
+                    <div className={["row"] + " " + ["portfolio-container"]} data-aos="fade-up" data-aos-delay={200}>
+                        {companiesList && companiesList.map(company =>
+                            <Company key={company._id}
+                                setEditCompany={setEditCompany}
+                                setAddCompany={setAddCompany}
+                                setDeleteCompany={setDeleteCompany}                                
+                                {...company} />)}
                     </div>
                 </div>
             </section>

@@ -15,8 +15,6 @@ export default function Starter() {
         <a href="index.html" className={styles['hero-logo']} data-aos="zoom-in"><img src={require("../../images/logo/logo.png")} alt="logo" /></a>
         <h1 data-aos="zoom-in">Welcome To Contact Manager</h1>
         <div>
-        <Link to={`/companies`}>
-        <p data-aos="fade-up" data-aos-delay="200"className={styles["btn-get-started"]}>Get Started</p></Link>
         <Link to={`/login`}>
         <p data-aos="fade-up" data-aos-delay="200" href="#about" className={styles["btn-get-started"]}>Login</p></Link>
         </div>
