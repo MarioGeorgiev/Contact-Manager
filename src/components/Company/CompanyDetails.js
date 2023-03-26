@@ -30,7 +30,7 @@ export default function CompanyDetails(){
                   <li><strong>VAT Number</strong>: {company.VATNumber}</li>
                   <li><strong>Phone</strong>: {company.phone}</li>
                   <li><strong>Email</strong>: {company.email}</li>
-                  <li><strong>Activities</strong>: {company.activities}</li>
+                  {/*<li><strong>Activities</strong>: {company.activities}</li>*/}
                 </ul>
               </div>
               <h2>Employees</h2>

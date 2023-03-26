@@ -124,7 +124,7 @@ export default function EditCompany({
                 </p>
               </div>
             </div>
-            <div className={styles["form-row"]}>
+            {/*<div className={styles["form-row"]}>
               <div className={styles["form-group"]}>
                 <label htmlFor="activities">Company activitсies</label>
                 <div className={styles["input-wrapper"]}>
@@ -136,7 +136,7 @@ export default function EditCompany({
                 </p>
               </div>
 
-            </div>
+             </div>*/}
             <div id={styles["form-actions"]}>
               <button id={styles["action-save"]} className={styles["btn"]} type="submit">Save</button>
               <button id={styles["action-cancel"]} className={styles["btn"]} type="button" onClick={() => setEditCompany(false)}>

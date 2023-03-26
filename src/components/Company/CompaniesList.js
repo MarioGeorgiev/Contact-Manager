@@ -63,7 +63,7 @@ export default function CompaniesList() {
                     <div className={['section-title'] + " " + ["aos-init"] + " " + ["aos-animate"]} data-aos="fade-up">
                         <h2>Company Details</h2>
                     </div>
-                    <div className={["row"] + " " + ["aos-init"] + " " + ["aos-animate"]} data-aos="fade-up" data-aos-delay={100}>
+                    {/*<div className={["row"] + " " + ["aos-init"] + " " + ["aos-animate"]} data-aos="fade-up" data-aos-delay={100}>
                         <div className={["col-lg-12"] + " " + ["d-flex"] + " " + ["justify-content-center"]}>
                             <ul id={styles["portfolio-flters"]}>
                                 <li data-filter="*" className={styles["filter-active"]}>All</li>
@@ -72,7 +72,7 @@ export default function CompaniesList() {
                                 <li data-filter=".filter-web">Web</li>
                             </ul>
                         </div>
-                    </div>
+                    </div>*/}
                     <button className={styles["btn-add-portfolio"]} onClick={() => setAddCompany(true)}>Add new company</button>
                     <div className={["row"] + " " + ["portfolio-container"]} data-aos="fade-up" data-aos-delay={200}>
                         {companiesList && companiesList.map(company =>
