@@ -286,6 +286,10 @@ ul {
   color: #d9534f;
   min-height: 20px;
 }
+.form-error {
+  color: #d9534f;
+  min-height: 20px;
+}
 
 .long-line {
   width: 98%;

@@ -135,7 +135,7 @@ export default function CreateCompany({
                 onBlur={(e) => onFormValidationHandler(e)} />
               </div>
               {errorsValidation.logoUrl &&
-              <p className={styles["form-error"]}>Logo should start with HTTP/HTTPS</p>}
+              <p className={styles["form-error"]}>Logo should start with HTTP or HTTPS</p>}
             </div>
             <div className={styles["form-row"]}>
               <div className={styles["form-group"]}>
