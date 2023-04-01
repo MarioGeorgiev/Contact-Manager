@@ -23,7 +23,7 @@ export default function DeleteEmployee({
           <div className="row gy-4">
             <div className="col-lg-8">
                 <div className={styles["portfolio-info"]}>
-                <h3>Company information</h3>
+                <h3>Employee details</h3>
                 <ul>
                   <li><strong>First Name</strong>: {employee[0].firstName} </li>
                   <li><strong>Last Name</strong>: {employee[0].lastName}</li>
