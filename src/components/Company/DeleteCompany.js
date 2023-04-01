@@ -1,6 +1,4 @@
-import { useEffect, useState } from 'react'
 import styles from './CreateDelete.module.css'
-import * as api from '../../services/api'
 export default function DeleteCompany({
   setDeleteCompany,
   onDeleteCompanyConfirm,
@@ -31,7 +29,7 @@ export default function DeleteCompany({
                   <li><strong>VAT Number</strong>: {company[0].VATNumber}</li>
                   <li><strong>Phone</strong>: {company[0].phone}</li>
                   <li><strong>Email</strong>: {company[0].email}</li>
-                  <li><strong>Activities</strong>: {company[0].activities}</li>
+                  {/*<li><strong>Activities</strong>: {company[0].activities}</li>*/}
                 </ul>
               </div>          
               
