@@ -89,7 +89,7 @@ export default function EditCompany({
       <div className={styles["modal"]}>
         <div className={styles["user-container"]}>
           <header className={styles["headers"]}>
-            <h2>Create Company</h2>
+            <h2>Edit Company</h2>
             <button className={styles["close"]} onClick={() => setEditCompany(false)} >
               x
             </button>

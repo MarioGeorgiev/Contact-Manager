@@ -6,8 +6,6 @@ export const RouteGuard = ({
     children,
 }) => {
     const { authToken } = useAuthContext();
-    console.log(authToken)
-    console.log(authToken.isAuthenticated)
     if (!authToken.isAuthenticated) {
         return <Navigate to="/login" />;
     }
