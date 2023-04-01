@@ -10,8 +10,9 @@ export const AuthProvider = ({
         if (localStorage.getItem("authToken")) {
             return {
                 "authToken":localStorage.getItem("authToken"),
-                "authToken":localStorage.getItem("email"),
+                "email":localStorage.getItem("email"),
                 "userId":localStorage.getItem("userId"),
+                "isAuthenticated":true
             }
         } else {
             return false

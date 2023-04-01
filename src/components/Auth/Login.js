@@ -16,13 +16,13 @@ export default function Register() {
     }
     const onSubmitHandler = async (e) => {
         e.preventDefault()       
-        const result = await api.login(values.email,values.password)
-      
+        const result = await api.login(values.email,values.password)        
         if(result.accessToken){
             setAuthToken(state =>({
                 "authToken": result.accessToken,
                 "userId": result._id,
                 "email": result.email,
+                "isAuthenticated":true
             }))
         }
         
