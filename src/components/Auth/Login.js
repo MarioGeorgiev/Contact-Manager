@@ -37,7 +37,7 @@ export default function Register() {
                         <label htmlFor="email">Email</label>
                         <input type="text" placeholder="email" name="email" value={values.email} onChange={(e)=>onChangeHanler(e)}/>
                         <label htmlFor="password">Password</label>
-                        <input type="text" placeholder="password" name="password" value={values.password} onChange={(e)=>onChangeHanler(e)}/>
+                        <input type="password" placeholder="password" name="password" value={values.password} onChange={(e)=>onChangeHanler(e)}/>
                         <button>Login</button>
                     </form>
                 </div>
