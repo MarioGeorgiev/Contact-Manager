@@ -17,6 +17,8 @@
 
 Please note that all of the forms have validations, so if you are trying to enter not valid data you will not be allowed to save your records
 
+The app is using [softuni-practice-server](https://github.com/softuni-practice-server/softuni-practice-server) and the front-end part is already deployied [here](https://contact-manager-74e93.web.app/). Hence, if you start your softuni-practice-server you can enjoy it directly, by openning the link.
+
 ### Some screenshots from the app :camera:
 ![image](https://user-images.githubusercontent.com/37220117/229302714-c5e2fa3d-c5f6-4028-8431-ca1bcf4ca032.png)
 ![image](https://user-images.githubusercontent.com/37220117/229302789-af61e5e3-41a3-4ccf-b603-965fa97a38bb.png)
